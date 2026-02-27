@@ -1,9 +1,9 @@
 cask "moraya" do
-  arch arm: "aarch64", intel: "164121fb7c609f91fe2fd49c02c655c950a768189b4f5649cd0292802c666a67"
+  arch arm: "aarch64", intel: "066d3d4079ca99108262d378537b915f471a586bcd8d9075d47eda26edf1d769"
 
-  version "0.17.0"
-  sha256 arm:   "b2947e3934fe95dba36490c6f5ee4e20d159c4b001c2a5e9dedd395511b98246",
-         intel: "164121fb7c609f91fe2fd49c02c655c950a768189b4f5649cd0292802c666a67"
+  version "0.17.1"
+  sha256 arm:   "1139c91e55ff4e53fa74da4460f94cb0f5602169e1b7b7c863b8fe9705ee9c6c",
+         intel: "066d3d4079ca99108262d378537b915f471a586bcd8d9075d47eda26edf1d769"
 
   url "https://github.com/zouwei/moraya/releases/download/v#{version}/Moraya_#{version}_#{arch}.dmg",
       verified: "github.com/zouwei/moraya/"
