@@ -1,0 +1,57 @@
+name: Bump Moraya Cask
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'New version (without v prefix)'
+        required: true
+      tag:
+        description: 'Git tag (with v prefix)'
+        required: true
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download DMGs and compute SHA256
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          TAG="${{ github.event.inputs.tag }}"
+          BASE_URL="https://github.com/zouwei/moraya/releases/download/${TAG}"
+
+          echo "Downloading Moraya ${VERSION} DMGs..."
+          curl -fSL "${BASE_URL}/Moraya_${VERSION}_aarch64.dmg" -o arm64.dmg
+          curl -fSL "${BASE_URL}/Moraya_${VERSION}_x64.dmg" -o x64.dmg
+
+          SHA_ARM=$(shasum -a 256 arm64.dmg | awk '{print $1}')
+          SHA_INTEL=$(shasum -a 256 x64.dmg | awk '{print $1}')
+
+          echo "aarch64 SHA256: ${SHA_ARM}"
+          echo "x64 SHA256:     ${SHA_INTEL}"
+
+          echo "SHA_ARM=${SHA_ARM}" >> $GITHUB_ENV
+          echo "SHA_INTEL=${SHA_INTEL}" >> $GITHUB_ENV
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+
+      - name: Update cask formula
+        run: |
+          sed -i "s/version \".*\"/version \"${VERSION}\"/" Casks/moraya.rb
+          sed -i "s/sha256 arm:   \".*\"/sha256 arm:   \"${SHA_ARM}\"/" Casks/moraya.rb
+          sed -i "s/intel: \".*\"/intel: \"${SHA_INTEL}\"/" Casks/moraya.rb
+
+          echo "Updated Casks/moraya.rb:"
+          cat Casks/moraya.rb
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Casks/moraya.rb
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "bump moraya to ${VERSION}"
+          git push
