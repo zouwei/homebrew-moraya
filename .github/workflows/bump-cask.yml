@@ -25,8 +25,8 @@ jobs:
           BASE_URL="https://github.com/zouwei/moraya/releases/download/${TAG}"
 
           echo "Downloading Moraya ${VERSION} DMGs..."
-          curl -fSL "${BASE_URL}/Moraya_${VERSION}_aarch64.dmg" -o arm64.dmg
-          curl -fSL "${BASE_URL}/Moraya_${VERSION}_x64.dmg" -o x64.dmg
+          curl -fSL "${BASE_URL}/Moraya_${VERSION}_mac_aarch64.dmg" -o arm64.dmg
+          curl -fSL "${BASE_URL}/Moraya_${VERSION}_mac_x64.dmg" -o x64.dmg
 
           SHA_ARM=$(shasum -a 256 arm64.dmg | awk '{print $1}')
           SHA_INTEL=$(shasum -a 256 x64.dmg | awk '{print $1}')
