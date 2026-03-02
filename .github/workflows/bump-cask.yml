@@ -42,7 +42,7 @@ jobs:
         run: |
           sed -i "s/version \".*\"/version \"${VERSION}\"/" Casks/moraya.rb
           sed -i "s/sha256 arm:   \".*\"/sha256 arm:   \"${SHA_ARM}\"/" Casks/moraya.rb
-          sed -i "s/intel: \".*\"/intel: \"${SHA_INTEL}\"/" Casks/moraya.rb
+          sed -i "s/^         intel: \".*\"/         intel: \"${SHA_INTEL}\"/" Casks/moraya.rb
 
           echo "Updated Casks/moraya.rb:"
           cat Casks/moraya.rb

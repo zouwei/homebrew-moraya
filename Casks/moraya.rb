@@ -1,5 +1,5 @@
 cask "moraya" do
-  arch arm: "aarch64", intel: "6b08cf186f6e8252ede721ea2e797b4524ba3bb19121e2deec8eaa60d733d96b"
+  arch arm: "aarch64", intel: "x64"
   version "0.21.0"
   sha256 arm:   "9ee4d36bd7a0f5f81f3289f94739d2077d9061b62b0c8d6168439bd96f974f57",
          intel: "6b08cf186f6e8252ede721ea2e797b4524ba3bb19121e2deec8eaa60d733d96b"
