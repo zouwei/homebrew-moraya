@@ -1,8 +1,8 @@
 cask "moraya" do
   arch arm: "aarch64", intel: "x64"
-  version "0.45.20"
-  sha256 arm:   "8ccfd80e4cc8164bc1ca43889a1da6471b7fbe3bb10b7579c6225e8153f01fb8",
-         intel: "6b3335e36e5b80cf754abcedd84c4bf875af24b05693b38bb1423348d0599cf4"
+  version "0.45.21"
+  sha256 arm:   "3373994c5571507c24f1031e8d03313dcc2a551b95c998acb5a42e5b438db4c4",
+         intel: "aefaf8410398860c6ef9be900e93a4784a6c54ed0ecb7c2de770cfdb4d989b1b"
 
 
   url "https://github.com/zouwei/moraya/releases/download/v#{version}/Moraya_#{version}_mac_#{arch}.dmg",
